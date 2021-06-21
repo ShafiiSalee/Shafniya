@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Student Grade Calculator</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <h2>Student Grade Calculator</h2>
+            <form id="stuform">
+                <input type="text" name="studentid" id="stuid" placeholder="Enter Student ID (Format: ST-00100)" class="box"  required><br>
+                <input type="number" name="mathsmarks" id="maths" placeholder="Enter Mathematics Marks" class="box" required><br>
+                <input type="number" name="englishmarks" id="english" placeholder="Enter English Marks" class="box" required><br>
+                <input type="number" name="sciencemarks" id="science" placeholder="Enter Science Marks" class="box" required><br>
+                <input type="button" value="ENTER" class="button" onclick="addRow()" id="add">
+            </form>
+        </div>
+
+        <h2 style="text-align: center;">Student Results</h2>
+        <div class="tablecontainer">
+            <table cellspacing=0 id="table">
+                <tr>
+                    <th>Student No</th>
+                    <th>Mathematics</th>
+                    <th>English</th>
+                    <th>Science</th>
+                    <th>Total</th>
+                    <th>Average</th>
+                    <th>Grade</th>
+                </tr>
+            </table>
+        </div>
+
+        
+
+    <script>  
+        
+      function validate(){
+        var indexNumber  = document.getElementById('stuid').value;
+        var idCheck = /^ST-[0-9]{5}$/g;
+
+        var idResult = indexNumber.match(idCheck);
+
+        if(idResult == false){
+          alert('Please enter a valid index number');
+          return false;
+        }
+        
+        return true;
+      }
+
+	//if (stuid !="" &&  maths !="" && english !="" && science !=""
+
+    function addRow() {
+    "use strict";
+
+        var table = document.getElementById("table");
+        
+        var row= document.createElement("tr");
+        console.log(row);
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        var td3 = document.createElement("td");
+        var td4 = document.createElement("td");
+        var td5 = document.createElement("td");
+        var td6 = document.createElement("td");
+        var td7 = document.createElement("td");
+        
+        td1.innerHTML = document.getElementById("stuid").value;
+        td2.innerHTML = parseInt(document.getElementById('maths').value);
+        td3.innerHTML = parseInt(document.getElementById('english').value);
+        td4.innerHTML = parseInt(document.getElementById('science').value);
+        td5.innerHTML = parseInt(td2.innerHTML) + parseInt(td3.innerHTML) + parseInt(td4.innerHTML);
+        td6.innerHTML = parseInt(td5.innerHTML)/3;
+        
+                if(parseInt(td6.innerHTML)>=75){
+                    td7.innerHTML ="A";
+
+                }            
+                else if  (parseInt(td6.innerHTML) <=74 && (parseInt(td6.innerHTML)>=65)){
+                    td7.innerHTML ="B";
+                }
+
+                else if  (parseInt(td6.innerHTML) <=64 && (parseInt(td6.innerHTML)>=55)){
+                    td7.innerHTML ="C";
+                }
+
+                else if  (parseInt(td6.innerHTML) <=54 && (parseInt(td6.innerHTML)>=40)){
+                    td7.innerHTML ="S";
+                }
+                
+                else{
+                td7.innerHTML ="F";
+                }
+
+
+
+        row.appendChild(td1);
+        row.appendChild(td2);
+        row.appendChild(td3);
+        row.appendChild(td4);
+        row.appendChild(td5);
+        row.appendChild(td6);
+        row.appendChild(td7);
+
+        table.children[0].appendChild(row);
+        document.getElementById("stuform").reset();
+    }
+
+    </script>
+    </body>
+</html>
